@@ -23,11 +23,43 @@ class _HomePageState extends State<HomePage>{
         ListaCidadesFragment.title),
       ),
       body: _buildBody(),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _fragmentIndex,
+          items: const[
+            BottomNavigationBarItem(
+                icon: Icon(Icons.search),
+              label: ConsultaCepFragment.title,
+            ),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.list),
+              label: ListaCidadesFragment.title,
+            ),
+          ],
+        onTap: (int nexIndex){
+          if( nexIndex != _fragmentIndex){
+            setState(() {
+              _fragmentIndex = nexIndex;
+            });
+          }
+        },
+      ),
+      floatingActionButton: _buildFloatingActionButton(),
     );
   }
 
 
   Widget _buildBody() => _fragmentIndex == 0 ? ConsultaCepFragment() :
       ListaCidadesFragment();
+
+  Widget? _buildFloatingActionButton(){
+    if (_fragmentIndex == 0){
+      return null;
+    }
+    return FloatingActionButton(
+      child: Icon(Icons.add),
+      tooltip: 'Cadastrar Cidade',
+      onPressed: null,
+    );
+  }
 
 }
