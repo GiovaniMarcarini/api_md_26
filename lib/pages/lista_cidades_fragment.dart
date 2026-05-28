@@ -8,10 +8,10 @@ class ListaCidadesFragment extends StatefulWidget{
   const ListaCidadesFragment({Key? key}): super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _ListaCidadesFragmentState();
+  State<StatefulWidget> createState() => ListaCidadesFragmentState();
 }
 
-class _ListaCidadesFragmentState extends State<ListaCidadesFragment>{
+class ListaCidadesFragmentState extends State<ListaCidadesFragment>{
 
   @override
   Widget build(BuildContext context){

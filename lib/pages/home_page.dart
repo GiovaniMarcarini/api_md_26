@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget{
 class _HomePageState extends State<HomePage>{
 
   var _fragmentIndex = 0;
+  final _listaCidadesKey = GlobalKey<ListaCidadesFragmentState>();
 
   @override
   Widget build(BuildContext context){
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage>{
 
 
   Widget _buildBody() => _fragmentIndex == 0 ? ConsultaCepFragment() :
-      ListaCidadesFragment();
+      ListaCidadesFragment(key:  _listaCidadesKey,);
 
   Widget? _buildFloatingActionButton(){
     if (_fragmentIndex == 0){
