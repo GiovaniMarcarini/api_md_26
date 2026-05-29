@@ -97,7 +97,10 @@ class ListaCidadesFragmentState extends State<ListaCidadesFragment>{
               ListTile(
                 leading: Icon(Icons.delete, color: Colors.red),
                 title: Text('Deletar'),
-                onTap: null,
+                onTap: () {
+                  Navigator.pop(context);
+                  _excluir(cidade);
+                },
               ),
             ],
           ),
@@ -109,6 +112,37 @@ class ListaCidadesFragmentState extends State<ListaCidadesFragment>{
             )
           ],
     ),
+    );
+  }
+
+  void _excluir(Cidade cidade){
+    showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: Text('Atenção'),
+          content: Text('O registro "${cidade.nome} - ${cidade.uf}" '
+              'será removido definitivamente'),
+          actions: [
+            TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text('Cancelar')
+            ),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context);
+                  _service.deleteCidade(cidade).then((_){
+                    _refreshidicatorKey.currentState?.show();
+                  }).catchError((error, stackTrace){
+                    print(stackTrace ?? error);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Não foi possível remover a cidade!')
+                    ));
+                  });
+                },
+                child: Text('OK')
+            )
+          ],
+        )
     );
   }
 }
